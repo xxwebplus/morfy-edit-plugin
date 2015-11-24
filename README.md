@@ -14,8 +14,9 @@
 		plugins
 			edit
 
+
 - Go to plugins/edit/edit.yml and edit this:
-- 
+
 
 		# for login
 		email: 'demo@gallery.com'
@@ -35,7 +36,9 @@
 
 
 
+
 - Place this code in your layout 
+
 	
 		{Action::run('Edit')}
 
