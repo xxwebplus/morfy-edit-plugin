@@ -1,0 +1,28 @@
+name: Edit
+version: 1.0.0
+description: "Edit Pages in Frontend"
+author:
+  name: Moncho Varela 
+  email: nakome@gmail.com
+  url: http://monchovarela.es
+license: MIT
+
+
+# for login
+email: 'morfy@gmail.com'
+password: 'morfy'
+# secret Token 
+token: 'Youcanuseanythinghereissecret'
+
+# language 
+errorPassword: 'Invalid email or password'
+edit_modal_title: 'Edit Page'
+access_modal_title: 'Enter Edit Area'
+edit_btn_name: 'Edit'
+close_btn_name: 'Close'
+logout_btn_name: 'Logout'
+update_btn_name: 'Update'
+enter_btn_name: 'Emter'
+
+# Plugin settings
+enabled: true
