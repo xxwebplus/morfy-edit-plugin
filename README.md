@@ -2,10 +2,7 @@
 
 ---
 
-**Demo:**
-
-	<video src="https://drive.google.com/file/d/0BwDTzfXzSRw4MkowMDRJQm5DRk0/view"></video>
-
+**Demo:** [video](https://drive.google.com/file/d/0BwDTzfXzSRw4MkowMDRJQm5DRk0/view)
 
 ---
 
