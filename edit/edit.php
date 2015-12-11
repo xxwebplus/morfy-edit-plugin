@@ -35,12 +35,6 @@ Action::add('Edit', function () {
         } elseif ($url == trim('/blog')) {
             $name = trim('/blog/index.md');
             $page = File::getContent(STORAGE_PATH.'/pages'.$name);
-            /*
-    // for another index folder names
-    }else if($url == trim('/foldername ')){
-        $name = trim('/foldername/index.md');
-        $page = File::getContent(STORAGE_PATH.'/pages'.$name);
-    */
             // others
         } else {
             $name = trim($url.'.md');
@@ -52,6 +46,7 @@ Action::add('Edit', function () {
 
         // show loginbtn
         if (Session::exists(Config::get('plugins.edit.name').'_user')) {
+
             // update file
             if (Request::post('Update_page')) {
                 if (Request::post('token')) {
@@ -68,6 +63,62 @@ Action::add('Edit', function () {
                 }
             }
 
+            // new file
+            if (Request::post('Save_page')) {
+                if (Request::post('token')) {
+                    $filename = Request::post('newFile');
+                    $dir = Request::post('directory');
+                    $content = Request::post('newContent');
+
+                    if ($filename && $content) {
+                        // empty dir save on pages dir 
+                         if ($dir == '') {
+                             if (File::exists(STORAGE_PATH.'/pages/'.sanitize($filename).'.md')) {
+                                 die('<span class="alert alert-danger">The file '.sanitize($filename).' already exists</span>');
+                             }
+                             File::setContent(STORAGE_PATH.'/pages/'.$filename.'.md', $content);
+                             Request::redirect(Url::getBase().'/'.$filename);
+                         } else {
+                             if (File::exists(STORAGE_PATH.'/pages/'.$dir.'/'.sanitize($filename).'.md')) {
+                                 die('<span class="alert alert-danger">The file '.sanitize($filename).' already exists</span>');
+                             }
+                             File::setContent(STORAGE_PATH.'/pages/'.$dir.'/'.sanitize($filename).'.md', $content);
+                             Request::redirect(Url::getBase().'/'.$dir.'/'.sanitize($filename));
+                         }
+                        //
+                    } else {
+                        die('You Cant write empty file');
+                    }
+                } else {
+                    // crsf
+                    die('crsf detect');
+                }
+            }
+
+            // remove file
+            if (Request::get('del')) {
+                if (Request::get('token')) {
+                    File::delete(STORAGE_PATH.'/pages'.Request::get('del').'.md');
+                    Request::redirect(Url::getBase());
+                } else {
+                    die('crsf detect !');
+                }
+            }
+
+            // remove Cache
+            if (Request::get('clearcache') == 'true') {
+                if (Request::get('token')) {
+                    $cache = File::scan(CACHE_PATH.'/fenom', 'php');
+                    foreach ($cache as $item) {
+                        File::delete($item);
+                    }
+                    Request::redirect(Url::getBase());
+                } else {
+                    die('crsf detect !');
+                }
+            }
+
+
             // logout
             if (Request::post('access_logout')) {
                 Session::delete(Config::get('plugins.edit.name').'_user');
@@ -79,6 +130,8 @@ Action::add('Edit', function () {
                 'admin.tpl', [
                 'title' => $name,
                 'content' => $page,
+                'current' => $url,
+                'directory' => Dir::scan(STORAGE_PATH.'/pages'),
                 ]
             );
         } else {
@@ -97,7 +150,7 @@ Action::add('Edit', function () {
                         $template->display(
                             'partials/error.tpl', [
                             'title' => 'Access Error',
-                            'content' => Config::get('plugins.edit.errorPassword'),
+                            'content' => Config::get('plugins.gallery.errorPassword'),
                             ]
                         );
                     }
@@ -110,3 +163,22 @@ Action::add('Edit', function () {
             $template->display('home.tpl');
         }
     });
+    
+/**
+ *   Get  pretty url like hello-world.
+ * @param unknown $str
+ * @return string
+ */
+function sanitize($str)
+{
+    //Lower case everything
+    $str = strtolower($str);
+    //Make alphanumeric (removes all other characters)
+    $str = preg_replace("/[^a-z0-9_\s-]/", '', $str);
+    //Clean up multiple dashes or whitespaces
+    $str = preg_replace("/[\s-]+/", ' ', $str);
+    //Convert whitespaces and underscore to dash
+    $str = preg_replace("/[\s_]/", '-', $str);
+
+    return $str;
+}
