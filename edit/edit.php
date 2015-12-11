@@ -148,7 +148,7 @@ Action::add('Edit', function () {
                         $template->display(
                             'partials/error.tpl', [
                             'title' => 'Access Error',
-                            'content' => Config::get('plugins.gallery.errorPassword'),
+                            'content' => Config::get('plugins.edit.errorPassword'),
                             ]
                         );
                     }
