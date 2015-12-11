@@ -22,7 +22,7 @@ edit_btn_name: 'Edit'
 close_btn_name: 'Close'
 logout_btn_name: 'Logout'
 update_btn_name: 'Update'
-enter_btn_name: 'Emter'
+enter_btn_name: 'Enter'
 
 # Plugin settings
 enabled: true
