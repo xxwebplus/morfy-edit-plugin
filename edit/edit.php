@@ -118,7 +118,6 @@ Action::add('Edit', function () {
                 }
             }
 
-
             // logout
             if (Request::post('access_logout')) {
                 Session::delete(Config::get('plugins.edit.name').'_user');
@@ -163,10 +162,12 @@ Action::add('Edit', function () {
             $template->display('home.tpl');
         }
     });
-    
+
 /**
  *   Get  pretty url like hello-world.
+ *
  * @param unknown $str
+ *
  * @return string
  */
 function sanitize($str)
