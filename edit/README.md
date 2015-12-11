@@ -17,10 +17,19 @@
 	token: '324097cfa96df3036b310d9ffc9ca78f'
 
 	# language 
+
 	errorPassword: 'Invalid email or password'
 	edit_modal_title: 'Edit Page'
 	access_modal_title: 'Enter Edit Area'
 	edit_btn_name: 'Edit'
+
+	new_modal_title: 'New File'
+	new_btn_title:  'New File'
+	new_btn_name:  'Save'
+	remove_btn_name:  'Remove File'
+	cache_btn_name: 'Clear Cache'
+	remove_alert: 'Are you sure'
+
 	close_btn_name: 'Close'
 	logout_btn_name: 'Logout'
 	update_btn_name: 'Update'
