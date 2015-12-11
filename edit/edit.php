@@ -137,7 +137,7 @@ Action::add('Edit', function () {
             // login
             if (Request::post('access_login')) {
                 if (Request::post('token')) {
-                    if (Request::post('password') == $password &&
+                    if (sha1(md5(Request::post('password'))) == $password &&
                         Request::post('email') == $user) {
                         @Session::start();
                         Session::set(Config::get('plugins.edit.name').'_user', $hash);
