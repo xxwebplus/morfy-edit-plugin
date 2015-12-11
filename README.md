@@ -36,7 +36,7 @@ Go to plugins/edit/edit.yml and edit this:
 	close_btn_name: 'Close'
 	logout_btn_name: 'Logout'
 	update_btn_name: 'Update'
-	enter_btn_name: 'Emter'
+	enter_btn_name: 'Enter'
 
 
 
