@@ -108,15 +108,14 @@ Action::add('Edit', function () {
             // remove Cache
             if (Request::get('clearcache') == 'true') {
                 if (Request::get('token')) {
-                    $cache = File::scan(CACHE_PATH.'/fenom', 'php');
-                    foreach ($cache as $item) {
-                        File::delete($item);
-                    }
+                    if(Dir::exists(CACHE_PATH.'/doctrine/'))Dir::delete(CACHE_PATH.'/doctrine/');
+                    if(Dir::exists(CACHE_PATH.'/doctrine/'))Dir::delete(CACHE_PATH.'/fenom/');
                     Request::redirect(Url::getBase());
                 } else {
                     die('crsf detect !');
                 }
             }
+
 
             // logout
             if (Request::post('access_logout')) {
@@ -162,12 +161,10 @@ Action::add('Edit', function () {
             $template->display('home.tpl');
         }
     });
-
+    
 /**
  *   Get  pretty url like hello-world.
- *
  * @param unknown $str
- *
  * @return string
  */
 function sanitize($str)
