@@ -2,13 +2,14 @@
 
 **Instructions:**
 
-- Paste edit folder in plugins folder
-- Activate plugin on config/system.yml
+Paste edit folder in plugins folder
+Activate plugin on config/system.yml
 
 		plugins
 			edit
 
-- Go to plugins/edit/edit.yml and edit this:
+
+Go to plugins/edit/edit.yml and edit this:
 
 
 	# for login
@@ -39,7 +40,7 @@
 
 
 
-- Place this code in your layout 
+Place this code in your layout 
 	
 	{Action::run('Edit')}
 
